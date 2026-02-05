@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS users(
+  id BIGSERIAL PRIMARY KEY,
+  username VARCHAR(20) UNIQUE NOT NULL,
+  password VARCHAR(128) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS index_username ON users(username);
