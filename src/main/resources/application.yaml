@@ -5,6 +5,11 @@ spring:
   profiles:
     active: dev
 
+  docker:
+    compose:
+      enabled: false
+      file: compose.yaml
+
   datasource:
     hikari:
       maximum-pool-size: 20
