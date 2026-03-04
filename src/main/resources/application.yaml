@@ -2,6 +2,11 @@ spring:
   application:
     name: cloud-storage-api
 
+  docker:
+    compose:
+      enabled: true
+      file: compose-localhost.yaml
+
   datasource:
     hikari:
       maximum-pool-size: 20
