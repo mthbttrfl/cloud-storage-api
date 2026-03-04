@@ -14,10 +14,8 @@ import org.example.cloudstorageapi.dto.req.ReqUserDTO;
 import org.example.cloudstorageapi.dto.resp.RespMessageDTO;
 import org.example.cloudstorageapi.dto.resp.RespMessagesDTO;
 import org.example.cloudstorageapi.dto.resp.RespUsernameDTO;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Tag(
         name = "Authentication",
