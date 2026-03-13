@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "minio.client")
-@Component
 @Getter
 @Setter
 public class MinIOClientProperties {
