@@ -50,12 +50,12 @@ public class GlobalErrorHandlerControllerAdvice {
                     .toList()));
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<RespMessageDTO> dataIntegrityViolationException(DataIntegrityViolationException ex){
+    @ExceptionHandler(UsernameAlreadyExists.class)
+    public ResponseEntity<RespMessageDTO> usernameAlreadyExists(UsernameAlreadyExists ex){
 
         log.error("DataIntegrityViolationException, message: {}", ex.getMessage(), ex);
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new RespMessageDTO(USERNAME_ALREADY_EXISTS));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new RespMessageDTO(ex.getMessage()));
     }
 
     @ExceptionHandler(PathIllegalArgumentException.class)
