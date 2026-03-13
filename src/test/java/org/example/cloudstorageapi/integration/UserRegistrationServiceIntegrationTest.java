@@ -1,9 +1,10 @@
 package org.example.cloudstorageapi.integration;
 
 import org.example.cloudstorageapi.dto.req.ReqUserDTO;
+import org.example.cloudstorageapi.exception.UsernameAlreadyExists;
 import org.example.cloudstorageapi.model.UserEntity;
 import org.example.cloudstorageapi.repository.UserRepository;
-import org.example.cloudstorageapi.service.user.UserUserRegistrationServiceImpl;
+import org.example.cloudstorageapi.service.user.UserRegistrationServiceImpl;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserRegistrationServiceIntegrationTest extends IntegrationTestContainers{
 
     @Autowired
-    private UserUserRegistrationServiceImpl registrationService;
+    private UserRegistrationServiceImpl registrationService;
 
     @Autowired
     private UserRepository userRepository;
@@ -43,7 +44,7 @@ public class UserRegistrationServiceIntegrationTest extends IntegrationTestConta
 
         registrationService.registration(dto);
 
-        assertThrows(DataIntegrityViolationException.class, () ->
+        assertThrows(UsernameAlreadyExists.class, () ->
                 registrationService.registration(dto)
         );
     }
