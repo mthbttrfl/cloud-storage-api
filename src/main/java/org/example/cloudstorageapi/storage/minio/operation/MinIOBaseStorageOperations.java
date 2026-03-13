@@ -54,7 +54,7 @@ public abstract class MinIOBaseStorageOperations {
 
         log.debug("Start checking directory exists: {}", pathDetails.getFullPath());
 
-        if (!directoryExists(pathDetails)) {
+        if (directoryNotExists(pathDetails)) {
             throw new StorageNotFoundException(DIRECTORY_NOT_EXIST_FORMATTED.formatted(pathDetails.getPathWithOutRootFolder()));
         }
 
@@ -126,7 +126,7 @@ public abstract class MinIOBaseStorageOperations {
                     current.substring(file.getRootFolder().length())
             );
 
-            if (directoryExists(dir)) {
+            if (directoryNotExists(dir)) {
                 createDirectoryObject(dir);
             }
         }
@@ -167,9 +167,9 @@ public abstract class MinIOBaseStorageOperations {
         }
     }
 
-    private boolean directoryExists(PathDetails pathDetails) {
+    private boolean directoryNotExists(PathDetails pathDetails) {
         if(pathDetails.hasRootFolder() && pathDetails.getPathWithOutRootFolder().isEmpty()){
-            return true;
+            return false;
         }
 
         try {
@@ -182,7 +182,7 @@ public abstract class MinIOBaseStorageOperations {
                             .build()
             );
 
-            return results.iterator().hasNext();
+            return !results.iterator().hasNext();
 
         } catch (Exception ex) {
             throw new StorageException(ex.getMessage(), ex);
