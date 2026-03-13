@@ -63,7 +63,7 @@ public class ResourceController implements ResourceApi<CustomUserDetails> {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<RespResourceInfoDTO>> upload(@RequestParam("path") String path,
                                                             @RequestPart("object") List<MultipartFile> multipartFile,
-                                                            @AuthenticationPrincipal CustomUserDetails userDetails) throws IOException {
+                                                            @AuthenticationPrincipal CustomUserDetails userDetails){
         List<RespResourceInfoDTO> upload = uploadService.upload(userDetails.getId(), path, multipartFile);
         return ResponseEntity.status(HttpStatus.CREATED).body(upload);
     }

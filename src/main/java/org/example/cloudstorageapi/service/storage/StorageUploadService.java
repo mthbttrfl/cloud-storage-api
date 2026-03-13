@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StorageUploadService <R, I>{
 
-    List<R> upload(I id, String path, List<MultipartFile> files) throws IOException;
+    List<R> upload(I id, String path, List<MultipartFile> files);
 }
