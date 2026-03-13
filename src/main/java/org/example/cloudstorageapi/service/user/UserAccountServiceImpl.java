@@ -29,10 +29,12 @@ public class UserAccountServiceImpl implements UserAccountService<Long, ReqUserD
         rootFolderInitializerService.init(id);
     }
 
+    @Override
     public Long registration(ReqUserDTO userDTO){
         return userRegistrationService.registration(userDTO);
     }
 
+    @Override
     public Authentication authenticate(ReqUserDTO userDTO, HttpServletRequest request, HttpServletResponse response){
         return authenticationService.authenticate(userDTO, request, response);
     }
