@@ -5,6 +5,8 @@ import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.parameters.CookieParameter;
 import io.swagger.v3.oas.models.servers.Server;
+import org.example.cloudstorageapi.config.property.DocumentationProperties;
+import org.example.cloudstorageapi.config.property.SessionProperties;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,24 +18,24 @@ import java.util.List;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI openAPI(DocumentationProperties documentationProperties) {
         return new OpenAPI()
                 .info(new Info()
-                        .title("CLOUD_STORAGE_API_DOCUMENTATION")
-                        .version("v1")
+                        .title(documentationProperties.getTitle())
+                        .version(documentationProperties.getVersion())
                 )
                 .servers(List.of(
                         new Server()
-                                .url("http://localhost:8080")
-                                .description("Local server")
+                                .url(documentationProperties.getServer())
+                                .description(documentationProperties.getDescription())
                 ));
     }
 
     @Bean
-    public OperationCustomizer cookieSessionCustomizer() {
+    public OperationCustomizer cookieSessionCustomizer(SessionProperties sessionProperties) {
         return (Operation operation, HandlerMethod handlerMethod) -> {
             operation.addParametersItem(new CookieParameter()
-                    .name("SESSION")
+                    .name(sessionProperties.getName())
                     .description("Session cookie для авторизации")
                     .required(false)
             );

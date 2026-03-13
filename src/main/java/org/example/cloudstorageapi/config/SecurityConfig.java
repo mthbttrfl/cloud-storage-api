@@ -1,6 +1,7 @@
 package org.example.cloudstorageapi.config;
 
 import org.example.cloudstorageapi.config.property.CorsProperties;
+import org.example.cloudstorageapi.config.property.SessionProperties;
 import org.example.cloudstorageapi.config.property.UrlEndpointsProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +36,8 @@ public class SecurityConfig {
                                                    UrlEndpointsProperties urlEndpointsProperties,
                                                    AuthenticationProvider customAuthenticationProvider,
                                                    AuthenticationEntryPoint customUnauthorizedEntryPoint,
-                                                   LogoutSuccessHandler customLogoutSuccessHandler) throws Exception {
+                                                   LogoutSuccessHandler customLogoutSuccessHandler,
+                                                   SessionProperties sessionProperties) throws Exception {
 
         return httpSecurity
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -53,7 +55,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl(urlEndpointsProperties.getLogout())
-                        .deleteCookies("SESSION")
+                        .deleteCookies(sessionProperties.getName())
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutSuccessHandler(customLogoutSuccessHandler)
