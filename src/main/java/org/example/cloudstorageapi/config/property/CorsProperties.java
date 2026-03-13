@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @ConfigurationProperties(prefix = "cors.allowed")
-@Component
 @Getter
 @Setter
 public class CorsProperties {
